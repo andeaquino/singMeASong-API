@@ -15,6 +15,13 @@ async function findSong(id) {
   return result.rows[0];
 }
 
+async function findRandomSong() {
+  const result = await connection.query(
+    `SELECT * FROM songs ORDER BY random() LIMIT 1;`
+  );
+  return result.rows[0];
+}
+
 async function updateSongScore(id, score) {
   await connection.query(`UPDATE songs SET score = $1 WHERE id = $2;`, [
     score,
