@@ -16,10 +16,23 @@ async function findSong(id) {
 }
 
 async function findRandomSong() {
-  const result = await connection.query(
+  const randomSong = await connection.query(
     `SELECT * FROM songs ORDER BY random() LIMIT 1;`
   );
-  return result.rows[0];
+
+  const popularSong = await connection.query(
+    `SELECT * FROM songs WHERE score > 10 ORDER BY random() LIMIT 1;`
+  );
+
+  const normalSong = await connection.query(
+    `SELECT * FROM songs WHERE score < 11 ORDER BY random() LIMIT 1;`
+  );
+
+  return {
+    popularSong: popularSong.rows[0],
+    normalSong: normalSong.rows[0],
+    randomSong: randomSong.rows[0],
+  };
 }
 
 async function updateSongScore(id, score) {
