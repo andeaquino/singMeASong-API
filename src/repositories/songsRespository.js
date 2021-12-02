@@ -14,3 +14,10 @@ async function findSong(id) {
 
   return result.rows[0];
 }
+
+async function updateSongScore(id, score) {
+  await connection.query(`UPDATE songs SET score = $1 WHERE id = $2`, [
+    score,
+    id,
+  ]);
+}
