@@ -21,3 +21,7 @@ async function updateSongScore(id, score) {
     id,
   ]);
 }
+
+async function deleteSong(id) {
+  await connection.query(`DELETE FROM songs WHERE id = $1`, [id]);
+}
