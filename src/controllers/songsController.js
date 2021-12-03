@@ -1,4 +1,5 @@
-import * as songsRepository from "../repositories/songsRespository.js";
+import * as songsRepository from "../repositories/songsRepository.js";
+import * as songsService from "../services/songsService.js";
 import { songSchema } from "../schemas/songSchema.js";
 
 async function postSong(req, res) {
@@ -17,4 +18,28 @@ async function postSong(req, res) {
   }
 }
 
-export { postSong };
+async function upvoteSong(req, res) {
+  const { id } = req.params;
+
+  try {
+    await songsService.voteSong(id, "upvote");
+
+    return res.sendStatus(204);
+  } catch {
+    res.sendStatus(500);
+  }
+}
+
+async function downvoteSong(req, res) {
+  const { id } = req.params;
+
+  try {
+    await songsService.voteSong(id, "downvote");
+
+    return res.sendStatus(204);
+  } catch {
+    res.sendStatus(500);
+  }
+}
+
+export { postSong, upvoteSong, downvoteSong };
