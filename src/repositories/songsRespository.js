@@ -57,3 +57,12 @@ async function listTopSongs(limit) {
 
   return result.rows;
 }
+
+export {
+  createSong,
+  findSong,
+  findRandomSong,
+  updateSongScore,
+  deleteSong,
+  listTopSongs,
+};
