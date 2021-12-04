@@ -42,4 +42,27 @@ async function downvoteSong(req, res) {
   }
 }
 
-export { postSong, upvoteSong, downvoteSong };
+async function listTopSongs(req, res) {
+  const { amount } = req.params;
+
+  try {
+    const songs = await songsRepository.listTopSongs(amount);
+    res.send(songs);
+  } catch {
+    res.sendStatus(500);
+  }
+}
+
+async function listRandomSong(req, res) {
+  try {
+    const song = await songsRepository.listRandomSong();
+
+    if (!song) return res.sendStatus(404);
+
+    return res.send(song);
+  } catch {
+    res.sendStatus(500);
+  }
+}
+
+export { postSong, upvoteSong, downvoteSong, listTopSongs, listRandomSong };

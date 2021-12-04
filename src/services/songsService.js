@@ -14,4 +14,19 @@ async function voteSong(id, type) {
   }
 }
 
-export { voteSong };
+async function listRandomSong() {
+  const songs = await songsRepository.findRandomSong();
+
+  if (!songs.popularSong || !songs.normalSong) {
+    return songs.randomSong;
+  }
+
+  const randomNumber = Math.floor(Math.random() * 10);
+  if (randomNumber < 7) {
+    return songs.popularSong;
+  } else {
+    return songs.normalSong;
+  }
+}
+
+export { voteSong, listRandomSong };
