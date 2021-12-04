@@ -42,4 +42,15 @@ async function downvoteSong(req, res) {
   }
 }
 
-export { postSong, upvoteSong, downvoteSong };
+async function listTopSongs(req, res) {
+  const { amount } = req.params;
+
+  try {
+    const songs = await songsRepository.listTopSongs(amount);
+    res.send(songs);
+  } catch {
+    res.sendStatus(500);
+  }
+}
+
+export { postSong, upvoteSong, downvoteSong, listTopSongs };
