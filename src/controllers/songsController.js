@@ -65,4 +65,4 @@ async function listRandomSong(req, res) {
   }
 }
 
-export { postSong, upvoteSong, downvoteSong, listTopSongs };
+export { postSong, upvoteSong, downvoteSong, listTopSongs, listRandomSong };
