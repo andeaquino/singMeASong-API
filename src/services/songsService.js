@@ -17,15 +17,15 @@ async function voteSong(id, type) {
 async function listRandomSong() {
   const songs = await songsRepository.findRandomSong();
 
-  if (!songs.popularSong || !songs.normalSong) {
-    return songs.randomSong;
+  if (!songs.popularSong[0] || !songs.normalSong[0]) {
+    return songs.randomSong[0];
   }
 
   const randomNumber = Math.floor(Math.random() * 10);
   if (randomNumber < 7) {
-    return songs.popularSong;
+    return songs.popularSong[0];
   } else {
-    return songs.normalSong;
+    return songs.normalSong[0];
   }
 }
 

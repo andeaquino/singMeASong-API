@@ -29,9 +29,9 @@ async function findRandomSong() {
   );
 
   return {
-    popularSong: popularSong.rows[0],
-    normalSong: normalSong.rows[0],
-    randomSong: randomSong.rows[0],
+    popularSong: popularSong.rows,
+    normalSong: normalSong.rows,
+    randomSong: randomSong.rows,
   };
 }
 
@@ -51,10 +51,9 @@ async function listTopSongs(limit) {
   if (limit) {
     query += ` LIMIT $1;`;
     const result = await connection.query(query, [limit]);
-  } else {
-    const result = await connection.query(query);
+    return result.rows;
   }
-
+  const result = await connection.query(query);
   return result.rows;
 }
 

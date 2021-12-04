@@ -55,7 +55,7 @@ async function listTopSongs(req, res) {
 
 async function listRandomSong(req, res) {
   try {
-    const song = await songsRepository.listRandomSong();
+    const song = await songsService.listRandomSong();
 
     if (!song) return res.sendStatus(404);
 
