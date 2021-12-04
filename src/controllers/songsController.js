@@ -53,4 +53,16 @@ async function listTopSongs(req, res) {
   }
 }
 
+async function listRandomSong(req, res) {
+  try {
+    const song = await songsRepository.listRandomSong();
+
+    if (!song) return res.sendStatus(404);
+
+    return res.send(song);
+  } catch {
+    res.sendStatus(500);
+  }
+}
+
 export { postSong, upvoteSong, downvoteSong, listTopSongs };
